@@ -2,8 +2,10 @@ import { useEffect } from "react";
 
 export default function BotpressChat() {
   useEffect(() => {
-    // Prevent loading Botpress more than once
-    if (document.getElementById("botpress-inject")) return;
+    // Don't load Botpress more than once
+    if (document.getElementById("botpress-inject")) {
+      return;
+    }
 
     const injectScript = document.createElement("script");
 
@@ -13,9 +15,10 @@ export default function BotpressChat() {
     injectScript.async = true;
 
     injectScript.onload = () => {
-      // Load the Botpress bot configuration only after
-      // the Botpress Webchat library has loaded.
-      if (document.getElementById("botpress-config")) return;
+      // Load your EduSpark bot after Botpress Webchat is ready
+      if (document.getElementById("botpress-config")) {
+        return;
+      }
 
       const configScript = document.createElement("script");
 
