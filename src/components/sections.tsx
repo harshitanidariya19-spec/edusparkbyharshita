@@ -194,9 +194,23 @@ export function PracticeSection() {
               </div>
               <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
                 <span className="text-xs font-medium text-muted-foreground">{t.metric}</span>
-                <Button variant="outline" size="sm" className="rounded-full font-semibold">
-                  {t.action} <ArrowRight className="size-3.5" />
-                </Button>
+                {t.title === "Coding Practice" ? (
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="rounded-full font-semibold"
+                  >
+                    <Link to="/coding-practice">
+                      {t.action} <ArrowRight className="size-3.5" />
+                    </Link>
+                  </Button>
+                ) : (
+                  <Button variant="outline" size="sm" className="rounded-full font-semibold">
+                    {t.action} <ArrowRight className="size-3.5" />
+                  </Button>
+                )}
+
               </div>
             </article>
           ))}
