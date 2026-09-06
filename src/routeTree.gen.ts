@@ -10,33 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CoursesRouteImport } from './routes/courses'
+import { Route as LiveClassesRouteImport } from './routes/live-classes'
+import { Route as MentorsRouteImport } from './routes/mentors'
+import { Route as PracticeRouteImport } from './routes/practice'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoursesRoute = CoursesRouteImport.update({
+  id: '/courses',
+  path: '/courses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LiveClassesRoute = LiveClassesRouteImport.update({
+  id: '/live-classes',
+  path: '/live-classes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MentorsRoute = MentorsRouteImport.update({
+  id: '/mentors',
+  path: '/mentors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PracticeRoute = PracticeRouteImport.update({
+  id: '/practice',
+  path: '/practice',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/courses': typeof CoursesRoute
+  '/live-classes': typeof LiveClassesRoute
+  '/mentors': typeof MentorsRoute
+  '/practice': typeof PracticeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/courses': typeof CoursesRoute
+  '/live-classes': typeof LiveClassesRoute
+  '/mentors': typeof MentorsRoute
+  '/practice': typeof PracticeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/courses': typeof CoursesRoute
+  '/live-classes': typeof LiveClassesRoute
+  '/mentors': typeof MentorsRoute
+  '/practice': typeof PracticeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/courses' | '/live-classes' | '/mentors' | '/practice'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/courses' | '/live-classes' | '/mentors' | '/practice'
+  id: '__root__' | '/' | '/courses' | '/live-classes' | '/mentors' | '/practice'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CoursesRoute: typeof CoursesRoute
+  LiveClassesRoute: typeof LiveClassesRoute
+  MentorsRoute: typeof MentorsRoute
+  PracticeRoute: typeof PracticeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +88,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/courses': {
+      id: '/courses'
+      path: '/courses'
+      fullPath: '/courses'
+      preLoaderRoute: typeof CoursesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/live-classes': {
+      id: '/live-classes'
+      path: '/live-classes'
+      fullPath: '/live-classes'
+      preLoaderRoute: typeof LiveClassesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mentors': {
+      id: '/mentors'
+      path: '/mentors'
+      fullPath: '/mentors'
+      preLoaderRoute: typeof MentorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/practice': {
+      id: '/practice'
+      path: '/practice'
+      fullPath: '/practice'
+      preLoaderRoute: typeof PracticeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CoursesRoute: CoursesRoute,
+  LiveClassesRoute: LiveClassesRoute,
+  MentorsRoute: MentorsRoute,
+  PracticeRoute: PracticeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
